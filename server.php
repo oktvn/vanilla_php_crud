@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     $name = '';
     $address = '';
     $id = 0;
@@ -13,6 +13,7 @@ if(isset($_POST['save'])) {
     $address = $_POST['address'];
     
     $query = "INSERT INTO info (name, address) VALUES ('$name', '$address')";
+    $_SESSION['msg'] = "Address saved";
     mysqli_query($db, $query);
     header('location: index.php'); // redirect to index after insertion
 }

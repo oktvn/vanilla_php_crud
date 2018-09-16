@@ -9,6 +9,13 @@
     <title>Document</title>
 </head>
 <body>
+    
+<?php if(isset($_SESSION['msg'])) : ?>
+    <div class="alert alert-success text-center" role="alert">
+        <?php echo $_SESSION['msg']; ?>
+        <?php unset($_SESSION['msg']); ?>
+    </div>
+<?php endif; ?>
     <div class="container">
         
     <div class="table-responsive well">
