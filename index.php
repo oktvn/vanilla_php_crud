@@ -1,4 +1,15 @@
-<?php include('server.php') ?>
+<?php include('server.php');
+
+if(isset($_GET['edit'])) {
+    $id = $_GET['edit'];
+    $rec = mysqli_query($db, "SELECT * FROM info WHERE id=$id");
+    $record  = mysqli_fetch_array($rec);
+    $name = $record['name'];
+    $address = $record['address'];
+    $id = $record['id'];
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +45,7 @@
                 <td><?php echo $row['name']; ?></td>
                 <td><?php echo $row['address']; ?></td>
                 <td>
-                    <a class="btn btn-default" href="#">Edit</a>
+                    <a class="btn btn-default" href="index.php?edit=<?php echo $row['id']; ?>">Edit</a>
                 </td>
                 <td>
                     <a class="btn btn-danger" href="#">Delete</a>
@@ -52,15 +63,21 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <form method="post" action="server.php">
+              <input type="hidden" name="id" value="<?php echo $id; ?>">
               <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name"  placeholder="Name">
+                <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>" placeholder="Name">
               </div>
               <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                <input type="text" class="form-control" id="address" name="address" value="<?php echo $value; ?>" placeholder="Address">
               </div>
-              <button type="submit" name="save" class="btn btn-default">Submit</button>
+              <?php 
+              if ($edit_state = false) : ?>
+                  <button type="submit" name="save" class="btn btn-default">Save</button>
+              <?php else : ?>
+                  <button type="submit" name="update" class="btn btn-default">Update</button>
+              <?php endif; ?>
             </form>
         </div>
     </div>

@@ -3,6 +3,7 @@
     $name = '';
     $address = '';
     $id = 0;
+    $edit_state = false;
 
 $db = mysqli_connect('127.0.0.1', 'root', 'password', 'crud');
 
@@ -21,4 +22,13 @@ if(isset($_POST['save'])) {
 // retrieve records
 
 $results = mysqli_query($db, "SELECT * FROM info");
+
+
+// update
+
+if(isset($_POST['update'])) {
+    $name = mysql_real_escape_string($_POST['name']);
+    $address = mysql_real_escape_string($_POST['address']);
+    $id = mysql_real_escape_string($_POST['id']);
+}
 ?>
