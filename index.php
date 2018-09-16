@@ -1,3 +1,4 @@
+<?php include('server.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,9 +22,10 @@
             </tr>
         </thead>
         <tbody>
+            <?php while($row = mysqli_fetch_array($results)) { ?>
             <tr>
-                <td>John</td>
-                <td>United States</td>
+                <td><?php echo $row['name']; ?></td>
+                <td><?php echo $row['address']; ?></td>
                 <td>
                     <a class="btn btn-default" href="#">Edit</a>
                 </td>
@@ -31,6 +33,8 @@
                     <a class="btn btn-danger" href="#">Delete</a>
                 </td>
             </tr>
+            <?php } ?>
+
         </tbody>
 
     </table>
@@ -40,16 +44,16 @@
     
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form method="post" action="./server.php">
+            <form method="post" action="server.php">
               <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name">
+                <input type="text" class="form-control" id="name" name="name"  placeholder="Name">
               </div>
               <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" placeholder="Address">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Address">
               </div>
-              <button type="submit" class="btn btn-default">Submit</button>
+              <button type="submit" name="save" class="btn btn-default">Submit</button>
             </form>
         </div>
     </div>
